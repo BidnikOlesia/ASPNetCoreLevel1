@@ -1,0 +1,30 @@
+﻿@model WebStore.Models.Employee
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+    <style type="text/css">
+        body {
+            width: 1140px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h2>@Model.LastName @Model.FirstName @Model.MiddleName</h2>
+
+    <p>Возраст: @Model.Age</p>
+    <p>Дата трудоустройства: @Model.EmploymentDate</p>
+    <p>Должность: @Model.Position</p>
+
+    <p><a href="/Home/Employees">Назад</a></p>
+</body>
+</html>
