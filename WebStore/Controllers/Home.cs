@@ -44,5 +44,7 @@ namespace WebStore.Controllers
 
         public IActionResult BlogSingle() => View();
 
+        public IActionResult Cart() => View();
+
     }
 }
