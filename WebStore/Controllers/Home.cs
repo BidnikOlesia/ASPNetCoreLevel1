@@ -58,5 +58,7 @@ namespace WebStore.Controllers
 
         public IActionResult Shop() => View();
 
+        public IActionResult Page404() => View();
+
     }
 }
