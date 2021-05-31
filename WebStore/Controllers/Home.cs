@@ -34,9 +34,11 @@ namespace WebStore.Controllers
             return View(_Employees);
         }
 
-        public IActionResult Details(int id)
+        public IActionResult EmployeeDetails(int id)
         {
             Employee employee = _Employees.Where(x => x.Id == id).FirstOrDefault();
+            if (employee == null)
+                return NotFound();
             return View(employee);
         }
 
