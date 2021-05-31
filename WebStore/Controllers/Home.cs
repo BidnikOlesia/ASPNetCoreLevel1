@@ -34,11 +34,31 @@ namespace WebStore.Controllers
             return View(_Employees);
         }
 
-        public IActionResult Details(int id)
+        public IActionResult EmployeeDetails(int id)
         {
             Employee employee = _Employees.Where(x => x.Id == id).FirstOrDefault();
+            if (employee == null)
+                return NotFound();
             return View(employee);
         }
+
+        public IActionResult Blog() => View();
+
+        public IActionResult BlogSingle() => View();
+
+        public IActionResult Cart() => View();
+
+        public IActionResult Checkout() => View();
+
+        public IActionResult ContactUs() => View();
+
+        public IActionResult Login() => View();
+
+        public IActionResult ProductDetails() => View();
+
+        public IActionResult Shop() => View();
+
+        public IActionResult Page404() => View();
 
     }
 }
