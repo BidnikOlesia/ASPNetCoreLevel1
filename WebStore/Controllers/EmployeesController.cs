@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebStore.Models;
 using WebStore.Services.Interfaces;
+using WebStore.ViewsModels;
 
 namespace WebStore.Controllers
 {
@@ -28,5 +29,47 @@ namespace WebStore.Controllers
 
             return View(employee);
         }
+
+        public IActionResult Create() => View();
+
+        public IActionResult Edit(int id) 
+        {
+            var employee = _EmployeesData.Get(id);
+            if (employee is null)
+                return NotFound();
+
+            var view_model = new EmployeeViewModel
+            {
+                Id = employee.Id,
+                LastName = employee.LastName,
+                FirstName = employee.FirstName,
+                MiddleName = employee.MiddleName,
+                Age = employee.Age,
+                EmploymentDate = employee.EmploymentDate,
+                Position = employee.Position,
+            };
+            return View(view_model);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(EmployeeViewModel Model)
+        {
+            var employee = new Employee
+            {
+                Id = Model.Id,
+                LastName = Model.LastName,
+                FirstName = Model.FirstName,
+                MiddleName = Model.MiddleName,
+                Age = Model.Age,
+                EmploymentDate = Model.EmploymentDate,
+                Position = Model.Position,
+            };
+
+            _EmployeesData.Update(employee);
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(int id) => View();
     }
 }

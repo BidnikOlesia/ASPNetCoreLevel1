@@ -16,7 +16,7 @@ namespace WebStore.Services.Interfaces
         
         void Update(Employee employee);
         
-        bool Delete(Employee employee);
+        bool Delete(int id);
 
     }
 }
