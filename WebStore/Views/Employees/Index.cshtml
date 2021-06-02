@@ -5,6 +5,10 @@
     <h3>Сотрудники</h3>
     <hr />
 
+    <p>
+        <a asp-action="Create" class="btn btn-default">Создать</a>
+    </p>
+
     <table class="table">
         <thead>
             <tr>
@@ -13,6 +17,8 @@
                 <th>Имя</th>
                 <th>Отчество</th>
                 <th>Возраст</th>
+                <th></th>
+                <th></th>
                 <th></th>
             </tr>
         </thead>
@@ -25,7 +31,23 @@
                     <td>@employee.FirstName</td>
                     <td>@employee.MiddleName</td>
                     <td>@employee.Age</td>
-                    <td><a asp-controller="Home" asp-action="EmployeeDetails" asp-route-id="@employee.Id">Детали</a></td>
+                    <td>
+                        <a asp-action="EmployeeDetails" asp-route-id="@employee.Id">
+                            <i class="fa fa-info"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@employee.Id">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <form asp-action="DeleteConfirmed" asp-route-id="@employee.Id">
+                            <button type="submit">
+                                <i class="fa fa-trash-o text-danger"></i>
+                            </button>
+                        </form>
+                    </td>
                 </tr>
             }
         </tbody>
