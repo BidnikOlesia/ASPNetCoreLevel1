@@ -4,18 +4,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebStore.Models;
+using WebStore.Services.Interfaces;
 
 namespace WebStore.Controllers
 {
     public class EmployeesController : Controller
     {
-        public IActionResult Index()=> View(_Employees);
+        private readonly IEmployeesData _EmployeesData;
+
+        public EmployeesController(IEmployeesData EmployeesData)
+        {
+            _EmployeesData = EmployeesData;
+        }
+
+        public IActionResult Index()=> View(_EmployeesData.GetAll());
 
         public IActionResult EmployeeDetails(int id)
         {
-            Employee employee = _Employees.Where(x => x.Id == id).FirstOrDefault();
+            Employee employee = _EmployeesData.Get(id);
+
             if (employee == null)
                 return NotFound();
+
             return View(employee);
         }
     }
