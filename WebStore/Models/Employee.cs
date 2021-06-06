@@ -12,7 +12,7 @@ namespace WebStore.Models
         public string LastName { get; set; }
         public string MiddleName { get; set; }
         public int Age { get; set; }
-        public string EmploymentDate { get; set; }
+        public DateTime EmploymentDate { get; set; }
         public string Position { get; set; }
     }
 }
