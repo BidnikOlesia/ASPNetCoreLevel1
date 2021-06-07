@@ -1,4 +1,17 @@
-﻿<partial name="Partial/_Slider"/>
+﻿@using WebStore.Services.Interfaces
+@using WebStore.ViewsModels
+@inject IProductData ProductData
+@{ 
+    var products = ProductData.GetProducts().Take(9).Select(x => new ProductViewModel
+    {
+        Id = x.Id,
+        Name = x.Name,
+        Price = x.Price,
+        ImageUrl = x.ImageUrl
+    });
+}
+
+<partial name="Partial/_Slider"/>
 <section>
     <div class="container">
         <div class="row">
@@ -7,7 +20,7 @@
             </div>
 
             <div class="col-sm-9 padding-right">
-                <partial name="Partial/_Products"/>
+                <partial name="Partial/_Products" model="products"/>
 
                 <partial name="Partial/_CategoryTab" />
 
