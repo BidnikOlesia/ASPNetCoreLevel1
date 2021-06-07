@@ -24,6 +24,8 @@ namespace WebStore
         {
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
 
+            services.AddSingleton<IProductData, InMemoryProductData>();
+
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
