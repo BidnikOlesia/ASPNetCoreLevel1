@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using WebStore.DAL.Context;
@@ -22,15 +23,16 @@ namespace WebStore.Data
         public void Initialize()
         {
             _logger.LogInformation("Инициализация БД");
+            var timer = Stopwatch.StartNew();
 
             if (_db.Database.GetPendingMigrations().Any())
             {
                 _logger.LogInformation("Миграция БД");
                 _db.Database.Migrate();
-                _logger.LogInformation("Миграция БД завершена");
+                _logger.LogInformation($"Миграция БД завершена за {timer.Elapsed.TotalSeconds}c");
             }
             else
-                _logger.LogInformation("Миграция БД не требуется");
+                _logger.LogInformation($"Миграция БД не требуется. {timer.Elapsed.TotalSeconds}c");
 
             try
             {
@@ -42,7 +44,7 @@ namespace WebStore.Data
                 _logger.LogError(e, "Ошибка при инициализации товаров в БД");
                 throw;
             }
-            _logger.LogInformation("Инициализация БД завершена");
+            _logger.LogInformation($"Инициализация БД завершена за {timer.Elapsed.TotalSeconds}c");
         }
 
         private void InitializeProducts()
@@ -53,6 +55,7 @@ namespace WebStore.Data
                 return;
             }
 
+            var timer = Stopwatch.StartNew();
             _logger.LogInformation("Инициализация секций");
             using (_db.Database.BeginTransaction())
             {
@@ -62,7 +65,7 @@ namespace WebStore.Data
                 _db.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Sections] OFF");
                 _db.Database.CommitTransaction();
             }
-            _logger.LogInformation("Инициализация секций выполнена");
+            _logger.LogInformation($"Инициализация секций выполнена за {timer.Elapsed.TotalSeconds}c");
 
             _logger.LogInformation("Инициализация брендов");
             using (_db.Database.BeginTransaction())
@@ -73,7 +76,7 @@ namespace WebStore.Data
                 _db.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Brands] OFF");
                 _db.Database.CommitTransaction();
             }
-            _logger.LogInformation("Инициализация брендов выполнена");
+            _logger.LogInformation($"Инициализация брендов выполнена за {timer.Elapsed.TotalSeconds}c");
 
             _logger.LogInformation("Инициализация товаров");
             using (_db.Database.BeginTransaction())
@@ -84,7 +87,7 @@ namespace WebStore.Data
                 _db.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Products] OFF");
                 _db.Database.CommitTransaction();
             }
-            _logger.LogInformation("Инициализация товаров выполнена");
+            _logger.LogInformation($"Инициализация товаров выполнена за {timer.Elapsed.TotalSeconds}c");
         }
     }
 }
