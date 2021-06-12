@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebStore.DAL.Context;
+using WebStore.Data;
 using WebStore.Services;
 using WebStore.Services.Interfaces;
 
@@ -25,6 +26,8 @@ namespace WebStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<WebStoreDB>(opt=> opt.UseSqlServer(Configuration.GetConnectionString("MSSQL")));
+
+            services.AddTransient<WebStoreDBInitializer>();
             
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
 
@@ -33,8 +36,11 @@ namespace WebStore
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider services)
         {
+            using (var scope = services.CreateScope())
+                scope.ServiceProvider.GetRequiredService<WebStoreDBInitializer>().Initialize();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
