@@ -73,7 +73,7 @@ namespace WebStore.Controllers
                 //    return Redirect(Model.ReturnUrl);
                 //else
                 //    return RedirectToAction("Index", "Home");
-                return LocalRedirect(Model.ReturnUrl);
+                return LocalRedirect(Model.ReturnUrl??"/");
             }
 
             ModelState.AddModelError("", "Ошибка в имени пользователя или пароле");
@@ -82,7 +82,11 @@ namespace WebStore.Controllers
         }
         #endregion
 
-        public IActionResult Logout() => RedirectToAction("Index", "Home");
+        public async Task<IActionResult> Logout()
+        {
+            await _SignInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
 
         public IActionResult AccessDenied() => View();
 

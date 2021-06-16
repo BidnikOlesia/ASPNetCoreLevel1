@@ -15,6 +15,7 @@ namespace WebStore.ViewsModels
 
         [Required]
         [Display(Name = "Пароль")]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [Display(Name = "Запомнить меня")]
