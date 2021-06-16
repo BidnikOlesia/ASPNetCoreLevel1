@@ -7,9 +7,9 @@ using WebStore.Domain;
 using WebStore.Domain.Entities;
 using WebStore.Services.Interfaces;
 
-namespace WebStore.Services
+namespace WebStore.Services.InMemory
 {
-    public class InMemoryProductData:IProductData
+    public class InMemoryProductData : IProductData
     {
         public IEnumerable<Brand> GetBrands() => TestData.Brands;
 
@@ -22,7 +22,7 @@ namespace WebStore.Services
             if (Filter?.SectionId is { } section_id)
                 query = query.Where(product => product.SectionId == section_id);
 
-            if(Filter?.BrandId is { } brand_id)
+            if (Filter?.BrandId is { } brand_id)
                 query = query.Where(product => product.BrandId == brand_id);
 
             return query;

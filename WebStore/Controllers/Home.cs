@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebStore.Models;
+using WebStore.Services.Interfaces;
+using WebStore.ViewsModels;
 
 namespace WebStore.Controllers
 {
@@ -13,8 +15,19 @@ namespace WebStore.Controllers
         
         private readonly IConfiguration Configuration;
         public HomeController(IConfiguration Configuration) { this.Configuration = Configuration; }
-        public IActionResult Index()
+        public IActionResult Index([FromServices]IProductData ProductData)
         {
+            var products = ProductData.GetProducts().Take(9).Select(x => new ProductViewModel
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Price = x.Price,
+                ImageUrl = x.ImageUrl
+            });
+
+            ViewBag.Products = products;
+            //ViewData["Products"] = products;
+
             return View();
         }
 
