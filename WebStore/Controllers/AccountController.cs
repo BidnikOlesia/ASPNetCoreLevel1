@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using WebStore.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using WebStore.ViewsModels;
+using Microsoft.Extensions.Logging;
 
 namespace WebStore.Controllers
 {
@@ -13,13 +14,13 @@ namespace WebStore.Controllers
     {
         private readonly UserManager<User> _UserManager;
         private readonly SignInManager<User> _SignInManager;
+        private readonly ILogger<AccountController> logger;
 
-
-        public AccountController(UserManager<User> UserManager, SignInManager<User> SignInManager)
+        public AccountController(UserManager<User> UserManager, SignInManager<User> SignInManager, ILogger<AccountController> Logger)
         {
             _UserManager = UserManager;
             _SignInManager = SignInManager;
-
+            logger = Logger;
         }
 
         #region Register
@@ -30,6 +31,8 @@ namespace WebStore.Controllers
         {
             if (!ModelState.IsValid) return View(Model);
 
+            logger.LogInformation($"Регистрация нового пользователя {Model.UserName}");
+
             var user = new User
             {
                 UserName = Model.UserName
@@ -38,11 +41,15 @@ namespace WebStore.Controllers
             if (register_result.Succeeded)
             {
                 await _SignInManager.SignInAsync(user, false);
+
+                logger.LogInformation($"Пользователь {Model.UserName} успешно зарегистрирован");
                 return RedirectToAction("Index", "Home");
             }
 
             foreach (var error in register_result.Errors)
                 ModelState.AddModelError("", error.Description);
+
+            logger.LogWarning($"Ошибка при регистрации пользователя {Model.UserName}: {string.Join(", ", register_result.Errors.Select(err=>err.Description))}");
 
             return View(Model);
         }
