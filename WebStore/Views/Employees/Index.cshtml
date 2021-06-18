@@ -1,13 +1,16 @@
-﻿
+﻿@using WebStore.Domain.Entities.Identity
 @model IEnumerable<WebStore.Models.Employee>
 
 <div class="container">
     <h3>Сотрудники</h3>
     <hr />
 
-    <p>
-        <a asp-action="Create" class="btn btn-default">Создать</a>
-    </p>
+    @if (User.IsInRole(Role.Administrators))
+    {
+        <p>
+            <a asp-action="Create" class="btn btn-default">Создать</a>
+        </p>
+    }
 
     <table class="table">
         <thead>
@@ -18,29 +21,39 @@
                 <th>Отчество</th>
                 <th>Возраст</th>
                 <th></th>
-                <th></th>
-                <th></th>
+                @if (User.IsInRole(Role.Administrators))
+                {
+                    <th></th>
+                    <th></th>
+                }
+
             </tr>
         </thead>
         <tbody>
             @foreach (var employee in Model)
             {
-                <tr>
-                    <td>@employee.Id</td>
-                    <td>@employee.LastName</td>
-                    <td>@employee.FirstName</td>
-                    <td>@employee.MiddleName</td>
-                    <td>@employee.Age</td>
-                    <td>
-                        <a asp-action="EmployeeDetails" asp-route-id="@employee.Id">
-                            <i class="fa fa-info"></i>
-                        </a>
-                    </td>
+            <tr>
+                <td>@employee.Id</td>
+                <td>@employee.LastName</td>
+                <td>@employee.FirstName</td>
+                <td>@employee.MiddleName</td>
+                <td>@employee.Age</td>
+                <td>
+                    <a asp-action="EmployeeDetails" asp-route-id="@employee.Id">
+                        <i class="fa fa-info"></i>
+                    </a>
+                </td>
+                @if (User.IsInRole(Role.Administrators))
+                {
                     <td>
                         <a asp-action="Edit" asp-route-id="@employee.Id">
                             <i class="fa fa-edit"></i>
                         </a>
                     </td>
+                }
+
+                @if (User.IsInRole(Role.Administrators))
+                {
                     <td>
                         <form asp-action="DeleteConfirmed" asp-route-id="@employee.Id">
                             <button type="submit">
@@ -48,7 +61,9 @@
                             </button>
                         </form>
                     </td>
-                </tr>
+                }
+
+            </tr>
             }
         </tbody>
     </table>
