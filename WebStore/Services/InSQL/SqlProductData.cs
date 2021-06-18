@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -30,5 +31,7 @@ namespace WebStore.Services.InSQL
         }
 
         public IEnumerable<Section> GetSections() => _db.Sections;
+
+        public Product GetProductById(int Id) => _db.Products.SingleOrDefault(p=>p.Id == Id);
     }
 }
