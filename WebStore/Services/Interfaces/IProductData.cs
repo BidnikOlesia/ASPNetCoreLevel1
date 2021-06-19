@@ -14,5 +14,7 @@ namespace WebStore.Services.Interfaces
         IEnumerable<Section> GetSections();
 
         IEnumerable<Product> GetProducts(ProductFilter Filter = null);
+
+        Product GetProductById(int Id);
     }
 }
