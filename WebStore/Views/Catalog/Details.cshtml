@@ -15,7 +15,7 @@
                     <!--product-details-->
                     <div class="col-sm-5">
                         <div class="view-product">
-                            <img src="~/images/product-details/1.jpg" alt="" />
+                            <img src="~/images/shop/@Model.ImageUrl" alt="" />
                             <h3>ZOOM</h3>
                         </div>
                         <div id="similar-product" class="carousel slide" data-ride="carousel">
@@ -68,7 +68,8 @@
                             </span>
                             <p><b>Доступность:</b> На складе</p>
                             <p><b>Состояние:</b> Новое</p>
-                            <p><b>Brand:</b> E-SHOPPER</p>
+                            <p><b>Секция:</b> @Model.Section</p>
+                            <p><b>Бренд:</b> @Model.Brand</p>
                             <a href=""><img src="~/images/product-details/share.png" class="share img-responsive" alt="" /></a>
                         </div><!--/product-information-->
                     </div>
