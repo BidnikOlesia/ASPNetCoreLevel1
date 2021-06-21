@@ -67,7 +67,8 @@ namespace WebStore
                 opt.SlidingExpiration = true;
             });
             
-            services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
+            //services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
+            services.AddScoped<IEmployeesData, SqlEmployeesData>();
             services.AddScoped<ICartService, InCookiesCartService>();
 
             //services.AddSingleton<IProductData, InMemoryProductData>();
