@@ -1,47 +1,355 @@
-﻿@model IEnumerable<WebStore.Domain.Entities.Product>
-@{
-    ViewBag.Title = "Управление каталогом товаров";
+﻿@{
+    ViewBag.Title = "Область администратора";
 }
 
-<div class="container">
-    <table class="table">
-        <thead>
-            <tr>
-                <th></th>
-                <th>@Html.DisplayNameFor(product => product.Id)</th>
-                <th>@Html.DisplayNameFor(product => product.Name)</th>
-                <th>@Html.DisplayNameFor(product => product.Brand)</th>
-                <th>@Html.DisplayNameFor(product => product.Section)</th>
-                <th>@Html.DisplayNameFor(product => product.ImageUrl)</th>
-                <th>@Html.DisplayNameFor(product => product.Price)</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach(var product in Model)
-            {
-            <tr>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@product.Id">
-                        <i class="glyphicon glyphicon-edit"></i>edit
-                    </a>
-                </td>
-                <td>@Html.DisplayFor(p => product.Id)</td>
-                <td>@Html.DisplayFor(p => product.Name)</td>
-                <td>@Html.DisplayFor(p => product.Brand.Name)</td>
-                <td>@Html.DisplayFor(p => product.Section.Name)</td>
-                <td>
-                    <img src="~/images/shop/@product.ImageUrl" width="50" alt="@product.Name" />
-                </td>
-                <td>@Html.DisplayFor(p => product.Price)</td>
-                <td>
-                    <a asp-action="Delete" asp-route-id="@product.Id" class="text-danger">
-                        <i class="glyphicon glyphicon-remove"></i>delete
-                    </a>
-                </td>
-            </tr>
-            }
-        </tbody>
-    </table>
-</div>
+<div id="page-inner">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>ADMIN DASHBOARD</h2>
+        </div>
+    </div>
+    <!-- /. ROW  -->
+    <hr />
+    <div class="row">
+        <div class="col-lg-12 ">
+            <div class="alert alert-info">
+                <strong>Welcome Jhon Doe ! </strong> You Have No pending Task For Today.
+            </div>
 
+        </div>
+    </div>
+    <!-- /. ROW  -->
+    <div class="row text-center pad-top">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-circle-o-notch fa-5x"></i>
+                    <h4>Check Data</h4>
+                </a>
+            </div>
+
+
+        </div>
+
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-envelope-o fa-5x"></i>
+                    <h4>Mail Box</h4>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-lightbulb-o fa-5x"></i>
+                    <h4>New Issues</h4>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-users fa-5x"></i>
+                    <h4>See Users</h4>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-key fa-5x"></i>
+                    <h4>Admin </h4>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-comments-o fa-5x"></i>
+                    <h4>Support</h4>
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+    <!-- /. ROW  -->
+    <div class="row text-center pad-top">
+
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-clipboard fa-5x"></i>
+                    <h4>All Docs</h4>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-gear fa-5x"></i>
+                    <h4>Settings</h4>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-wechat fa-5x"></i>
+                    <h4>Live Talk</h4>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-bell-o fa-5x"></i>
+                    <h4>Notifications </h4>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-rocket fa-5x"></i>
+                    <h4>Launch</h4>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-user fa-5x"></i>
+                    <h4>Register User</h4>
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+    <!-- /. ROW  -->
+    <div class="row text-center pad-top">
+
+
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-envelope-o fa-5x"></i>
+                    <h4>Mail Box</h4>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-lightbulb-o fa-5x"></i>
+                    <h4>New Issues</h4>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-users fa-5x"></i>
+                    <h4>See Users</h4>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-key fa-5x"></i>
+                    <h4>Admin </h4>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="#">
+                    <i class="fa fa-comments-o fa-5x"></i>
+                    <h4>Support</h4>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-circle-o-notch fa-5x"></i>
+                    <h4>Check Data</h4>
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+    <!-- /. ROW  -->
+    <div class="row text-center pad-top">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-rocket fa-5x"></i>
+                    <h4>Launch</h4>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-clipboard fa-5x"></i>
+                    <h4>All Docs</h4>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-gear fa-5x"></i>
+                    <h4>Settings</h4>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-wechat fa-5x"></i>
+                    <h4>Live Talk</h4>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-bell-o fa-5x"></i>
+                    <h4>Notifications </h4>
+                </a>
+            </div>
+
+
+        </div>
+
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-user fa-5x"></i>
+                    <h4>Register User</h4>
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+    <!-- /. ROW  -->
+    <div class="row text-center pad-top">
+
+
+
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-lightbulb-o fa-5x"></i>
+                    <h4>New Issues</h4>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-users fa-5x"></i>
+                    <h4>See Users</h4>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-key fa-5x"></i>
+                    <h4>Admin </h4>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-comments-o fa-5x"></i>
+                    <h4>Support</h4>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-circle-o-notch fa-5x"></i>
+                    <h4>Check Data</h4>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="div-square">
+                <a href="blank.html">
+                    <i class="fa fa-envelope-o fa-5x"></i>
+                    <h4>Mail Box</h4>
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+    <!-- /. ROW  -->
+    <div class="row">
+        <div class="col-lg-12 ">
+            <br />
+            <div class="alert alert-danger">
+                <strong>Want More Icons Free ? </strong> Checkout fontawesome website and use any icon <a target="_blank" href="http://fortawesome.github.io/Font-Awesome/icons/">Click Here</a>.
+            </div>
+
+        </div>
+    </div>
+    <!-- /. ROW  -->
+</div>

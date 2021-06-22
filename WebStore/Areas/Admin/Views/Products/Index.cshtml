@@ -1,5 +1,46 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<WebStore.Domain.Entities.Product>
 @{
+    ViewBag.Title = "Управление каталогом товаров";
 }
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>@Html.DisplayNameFor(product => product.Id)</th>
+                <th>@Html.DisplayNameFor(product => product.Name)</th>
+                <th>@Html.DisplayNameFor(product => product.Brand)</th>
+                <th>@Html.DisplayNameFor(product => product.Section)</th>
+                <th>@Html.DisplayNameFor(product => product.ImageUrl)</th>
+                <th>@Html.DisplayNameFor(product => product.Price)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@product.Id">
+                            <i class="glyphicon glyphicon-edit"></i>edit
+                        </a>
+                    </td>
+                    <td>@Html.DisplayFor(p => product.Id)</td>
+                    <td>@Html.DisplayFor(p => product.Name)</td>
+                    <td>@Html.DisplayFor(p => product.Brand.Name)</td>
+                    <td>@Html.DisplayFor(p => product.Section.Name)</td>
+                    <td>
+                        <img src="~/images/shop/@product.ImageUrl" width="50" alt="@product.Name" />
+                    </td>
+                    <td>@Html.DisplayFor(p => product.Price)</td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@product.Id" class="text-danger">
+                            <i class="glyphicon glyphicon-remove"></i>delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
