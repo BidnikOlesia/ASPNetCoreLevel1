@@ -7,7 +7,7 @@ using WebStore.ViewsModels;
 
 namespace WebStore.Services.Interfaces
 {
-    interface IOrderService
+    public interface IOrderService
     {
         Task<IEnumerable<Order>> GetUserOrder(string UserName);
 
