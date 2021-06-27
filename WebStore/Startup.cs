@@ -30,6 +30,18 @@ namespace WebStore
         }
         public void ConfigureServices(IServiceCollection services)
         {
+            var database_name = Configuration["Database"];
+
+            switch (database_name)
+            {
+                case "MSSQL":
+                    services.AddDbContext<WebStoreDB>(opt => opt.UseSqlServer(Configuration.GetConnectionString("MSSQL")));
+                    break;
+                case "Sqlite":
+                    services.AddDbContext<WebStoreDB>(opt => opt.UseSqlite(Configuration.GetConnectionString("Sqlite"), o=>o.MigrationsAssembly("WebStore.DAL.Sqlite")));
+                    break;
+            }
+
             services.AddDbContext<WebStoreDB>(opt=> opt.UseSqlServer(Configuration.GetConnectionString("MSSQL")));
 
             services.AddTransient<WebStoreDBInitializer>();
@@ -67,11 +79,14 @@ namespace WebStore
                 opt.SlidingExpiration = true;
             });
             
-            services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
+            //services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
+            services.AddScoped<IEmployeesData, SqlEmployeesData>();
             services.AddScoped<ICartService, InCookiesCartService>();
 
             //services.AddSingleton<IProductData, InMemoryProductData>();
             services.AddScoped<IProductData, SqlProductData>();
+
+            services.AddScoped<IOrderService, SqlOrderService>();
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
@@ -99,6 +114,11 @@ namespace WebStore
                 {
                     await context.Response.WriteAsync(Configuration["Greetings"]);
                 });
+
+                endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
 
                 endpoints.MapControllerRoute(
                     "default",
