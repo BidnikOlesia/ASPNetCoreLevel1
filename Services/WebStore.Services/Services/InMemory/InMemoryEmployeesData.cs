@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebStore.Data;
 using WebStore.Domain.Entities;
 using WebStore.Interfaces.Services;
+using WebStore.Services.Data;
 
-namespace WebStore.Services
+namespace WebStore.Services.Services.InMemory
 {
     public class InMemoryEmployeesData : IEmployeesData
     {
-        
+
         private int _CurrentMaxId;
 
         public InMemoryEmployeesData()
@@ -41,7 +41,7 @@ namespace WebStore.Services
             if (employee is null)
                 throw new ArgumentNullException(nameof(employee));
 
-            if (TestData.Employees.Contains(employee))  return;
+            if (TestData.Employees.Contains(employee)) return;
 
             var db_item = Get(employee.Id);
             if (db_item is null) return;

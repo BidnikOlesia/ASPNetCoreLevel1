@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities.Identity;
 
-namespace WebStore.Data
+namespace WebStore.Services.Data
 {
     public class WebStoreDBInitializer
     {
@@ -19,7 +19,7 @@ namespace WebStore.Data
         private readonly ILogger<WebStoreDBInitializer> _logger;
 
         public WebStoreDBInitializer(
-            WebStoreDB db, 
+            WebStoreDB db,
             UserManager<User> UserManager,
             RoleManager<Role> RoleManager,
             ILogger<WebStoreDBInitializer> Logger)
@@ -96,7 +96,7 @@ namespace WebStore.Data
             foreach (var section in TestData.Sections.Where(s => s.ParentId != null))
                 section.Parent = sections_pool[(int)section.ParentId];
 
-            foreach(var product in TestData.Products)
+            foreach (var product in TestData.Products)
             {
                 product.Section = sections_pool[product.SectionId];
                 if (product.BrandId is { } brand_id)
@@ -107,7 +107,7 @@ namespace WebStore.Data
                 product.BrandId = null;
             }
 
-            foreach(var section in TestData.Sections)
+            foreach (var section in TestData.Sections)
             {
                 section.Id = 0;
                 section.ParentId = null;
@@ -140,13 +140,13 @@ namespace WebStore.Data
                     await roleManager.CreateAsync(new Role { Name = RoleName });
                     _logger.LogInformation($"Роль {RoleName} создана успешно");
                 }
-                    
+
             }
 
             await CheckRole(Role.Administrators);
             await CheckRole(Role.Users);
 
-            if(await userManager.FindByNameAsync(User.Administrator) is null)
+            if (await userManager.FindByNameAsync(User.Administrator) is null)
             {
                 _logger.LogInformation($"Пользователь {User.Administrator} отстуствует. Создаем");
 

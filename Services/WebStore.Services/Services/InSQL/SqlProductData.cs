@@ -8,7 +8,7 @@ using WebStore.Domain;
 using WebStore.Domain.Entities;
 using WebStore.Interfaces.Services;
 
-namespace WebStore.Services.InSQL
+namespace WebStore.Services.Services.InSQL
 {
     public class SqlProductData : IProductData
     {
@@ -42,6 +42,6 @@ namespace WebStore.Services.InSQL
 
         public IEnumerable<Section> GetSections() => _db.Sections;
 
-        public Product GetProductById(int Id) => _db.Products.Include(p => p.Brand).Include(p => p.Section).SingleOrDefault(p=>p.Id == Id);
+        public Product GetProductById(int Id) => _db.Products.Include(p => p.Brand).Include(p => p.Section).SingleOrDefault(p => p.Id == Id);
     }
 }

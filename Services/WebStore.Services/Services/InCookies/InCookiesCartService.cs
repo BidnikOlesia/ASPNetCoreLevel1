@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 using WebStore.Domain;
 using WebStore.Domain.Entities;
 using WebStore.Domain.ViewsModels;
-using WebStore.Infrastructure.Mapping;
 using WebStore.Interfaces.Services;
+using WebStore.Services.Mapping;
 
-namespace WebStore.Services.InCookies
+namespace WebStore.Services.Services.InCookies
 {
     public class InCookiesCartService : ICartService
     {
@@ -18,7 +18,7 @@ namespace WebStore.Services.InCookies
         private readonly IProductData productData;
         private readonly string cartName;
 
-        public Cart Cart 
+        public Cart Cart
         {
             get
             {
@@ -26,7 +26,7 @@ namespace WebStore.Services.InCookies
                 var cookies = context!.Response.Cookies;
 
                 var cart_cookie = context.Request.Cookies[cartName];
-                if(cart_cookie is null)
+                if (cart_cookie is null)
                 {
                     var cart = new Cart();
                     cookies.Append(cartName, JsonConvert.SerializeObject(cart));
