@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebStore.ViewsModels
+namespace WebStore.Domain.ViewsModels
 {
     public class RegisterUserViewModel
     {
         [Required]
-        [Display(Name ="Имя пользователя")]
+        [Display(Name = "Имя пользователя")]
         public string UserName { get; set; }
 
         [Required]

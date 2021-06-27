@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebStore.ViewsModels
+namespace WebStore.Domain.ViewsModels
 {
     public class LoginViewModel
     {
@@ -21,7 +21,7 @@ namespace WebStore.ViewsModels
         [Display(Name = "Запомнить меня")]
         public bool RememberMe { get; set; }
 
-        [HiddenInput(DisplayValue =false)]
+        [HiddenInput(DisplayValue = false)]
         public string ReturnUrl { get; set; }
     }
 }

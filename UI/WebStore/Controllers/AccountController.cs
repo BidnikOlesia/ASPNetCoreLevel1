@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebStore.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
-using WebStore.ViewsModels;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
+using WebStore.Domain.ViewsModels;
 
 namespace WebStore.Controllers
 {

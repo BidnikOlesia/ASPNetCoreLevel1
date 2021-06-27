@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebStore.ViewsModels
+namespace WebStore.Domain.ViewsModels
 {
     public class CartViewModel
     {
