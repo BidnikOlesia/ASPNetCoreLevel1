@@ -44,8 +44,6 @@ namespace WebStore
                     break;
             }
 
-            services.AddDbContext<WebStoreDB>(opt=> opt.UseSqlServer(Configuration.GetConnectionString("MSSQL")));
-
             services.AddTransient<WebStoreDBInitializer>();
 
             services.AddIdentity<User, Role>().AddEntityFrameworkStores<WebStoreDB>().AddDefaultTokenProviders();
