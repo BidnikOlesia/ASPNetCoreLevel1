@@ -11,7 +11,7 @@ using WebStore.WebAPI.Clients.Base;
 
 namespace WebStore.WebAPI.Clients.Employees
 {
-    class EmployeesClient:BaseClient, IEmployeesData
+    public class EmployeesClient:BaseClient, IEmployeesData
     {
         public EmployeesClient(HttpClient Client):base(Client, "api/employees"){ }
 
