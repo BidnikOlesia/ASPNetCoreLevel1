@@ -9,6 +9,7 @@ using WebStore.Services.Data;
 
 namespace WebStore.Services.Services.InMemory
 {
+    [Obsolete("Поддержка класса размещения товаров в памяти прекращена", true)]
     public class InMemoryProductData : IProductData
     {
         public IEnumerable<Brand> GetBrands() => TestData.Brands;
@@ -29,5 +30,15 @@ namespace WebStore.Services.Services.InMemory
         }
 
         public Product GetProductById(int Id) => TestData.Products.SingleOrDefault(p => p.Id == Id);
+
+        public Section GetSection(int id)
+        {
+            throw new NotSupportedException();
+        }
+
+        public Brand GetBrand(int id)
+        {
+            throw new NotSupportedException();
+        }
     }
 }

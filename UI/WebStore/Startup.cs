@@ -19,7 +19,10 @@ using WebStore.Services.Services.InMemory;
 using WebStore.Services.Services.InCookies;
 using WebStore.Services.Services.InSQL;
 using WebStore.WebAPI.Clients.Values;
+using WebStore.WebAPI.Clients.Employees;
 using WebStore.Interfaces.Services.TestAPI;
+using WebStore.WebAPI.Clients.Products;
+using WebStore.WebAPI.Clients.Orders;
 
 namespace WebStore
 {
@@ -43,8 +46,6 @@ namespace WebStore
                     services.AddDbContext<WebStoreDB>(opt => opt.UseSqlite(Configuration.GetConnectionString("Sqlite"), o=>o.MigrationsAssembly("WebStore.DAL.Sqlite")));
                     break;
             }
-
-            services.AddDbContext<WebStoreDB>(opt=> opt.UseSqlServer(Configuration.GetConnectionString("MSSQL")));
 
             services.AddTransient<WebStoreDBInitializer>();
 
@@ -82,15 +83,21 @@ namespace WebStore
             });
             
             //services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
-            services.AddScoped<IEmployeesData, SqlEmployeesData>();
+            //services.AddScoped<IEmployeesData, SqlEmployeesData>();
             services.AddScoped<ICartService, InCookiesCartService>();
+            //services.AddScoped<IProductData, SqlProductData>();
+            //services.AddScoped<IOrderService, SqlOrderService>();
 
-            //services.AddSingleton<IProductData, InMemoryProductData>();
-            services.AddScoped<IProductData, SqlProductData>();
+            //services.AddHttpClient<IValuesService, ValuesClient>(client=>client.BaseAddress = new Uri(Configuration["WebAPI"]));
+            //services.AddHttpClient<IEmployeesData, EmployeesClient>(client => client.BaseAddress = new Uri(Configuration["WebAPI"]));
+            //services.AddHttpClient<IProductData, ProductsClient>(client => client.BaseAddress = new Uri(Configuration["WebAPI"]));
+            //services.AddHttpClient<IOrderService, OrdersClient>(client => client.BaseAddress = new Uri(Configuration["WebAPI"]));
 
-            services.AddScoped<IOrderService, SqlOrderService>();
-
-            services.AddHttpClient<IValuesService, ValuesClient>(client=>client.BaseAddress = new Uri(Configuration["WebAPI"]));
+            services.AddHttpClient("WebStoreApi", client => client.BaseAddress = new Uri(Configuration["WebAPI"]))
+                .AddTypedClient<IValuesService, ValuesClient>()
+                .AddTypedClient<IEmployeesData, EmployeesClient>()
+                .AddTypedClient<IProductData, ProductsClient>()
+                .AddTypedClient<IOrderService, OrdersClient>();
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
