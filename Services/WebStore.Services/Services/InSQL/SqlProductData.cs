@@ -16,7 +16,7 @@ namespace WebStore.Services.Services.InSQL
 
         public SqlProductData(WebStoreDB db) => _db = db;
 
-        public IEnumerable<Brand> GetBrands() => _db.Brands;
+        public IEnumerable<Brand> GetBrands() => _db.Brands.Include(s => s.Products);
 
         public IEnumerable<Product> GetProducts(ProductFilter Filter = null)
         {
@@ -40,7 +40,7 @@ namespace WebStore.Services.Services.InSQL
             return query;
         }
 
-        public IEnumerable<Section> GetSections() => _db.Sections;
+        public IEnumerable<Section> GetSections() => _db.Sections.Include(s=>s.Products);
 
         public Product GetProductById(int Id) => _db.Products.Include(p => p.Brand).Include(p => p.Section).SingleOrDefault(p => p.Id == Id);
 
