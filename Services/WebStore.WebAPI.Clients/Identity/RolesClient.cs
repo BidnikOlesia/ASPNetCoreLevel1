@@ -10,6 +10,7 @@ using WebStore.Interfaces.Services.Identity;
 using Microsoft.AspNetCore.Identity;
 using WebStore.Domain.Entities.Identity;
 using System.Threading;
+using System.Net.Http.Json;
 
 namespace WebStore.WebAPI.Clients.Identity
 {
