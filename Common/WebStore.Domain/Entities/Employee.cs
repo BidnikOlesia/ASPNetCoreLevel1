@@ -24,5 +24,10 @@ namespace WebStore.Domain.Entities
         public DateTime EmploymentDate { get; set; }
 
         public string Position { get; set; }
+
+        public override string ToString()
+        {
+            return $"(id: {Id}) {LastName} {FirstName} {MiddleName}";
+        }
     }
 }
