@@ -18,6 +18,7 @@ using WebStore.Interfaces.Services;
 using WebStore.Services.Data;
 using WebStore.Services.Services.InCookies;
 using WebStore.Services.Services.InSQL;
+using WebStoreLogger;
 
 namespace WebStore.WebAPI
 {
@@ -91,8 +92,10 @@ namespace WebStore.WebAPI
             });
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider services)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider services, ILoggerFactory log)
         {
+            log.AddLog4Net();
+
             using (var scope = services.CreateScope())
                 scope.ServiceProvider.GetRequiredService<WebStoreDBInitializer>().Initialize();
 
