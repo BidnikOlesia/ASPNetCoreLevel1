@@ -26,6 +26,7 @@ using WebStore.WebAPI.Clients.Orders;
 using WebStore.WebAPI.Clients.Identity;
 using Microsoft.Extensions.Logging;
 using WebStoreLogger;
+using WebStore.Infrastructure.MiddleWare;
 
 namespace WebStore
 {
@@ -139,6 +140,8 @@ namespace WebStore
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

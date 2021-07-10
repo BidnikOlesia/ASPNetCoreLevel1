@@ -61,5 +61,17 @@ namespace WebStore.Tests.Controllers
 
             Assert.Equal(expected_result_str, content_result.Content);
         }
+
+        [TestMethod, ExpectedException(typeof(ApplicationException))]
+        public void Throw_thrown_ApplicationException()
+        {
+            var configuration_moq = new Mock<IConfiguration>();
+            var controller = new HomeController(configuration_moq.Object);
+
+            const string expected_error_message = "Test error message";
+
+            var result = controller.Throw(expected_error_message);
+
+        }
     }
 }
