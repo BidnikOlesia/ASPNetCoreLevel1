@@ -90,10 +90,12 @@ namespace WebStore.Controllers
                 //    return Redirect(Model.ReturnUrl);
                 //else
                 //    return RedirectToAction("Index", "Home");
+                logger.LogInformation($"Пользователь {Model.UserName} успешно вошел в систему");
                 return LocalRedirect(Model.ReturnUrl??"/");
             }
 
             ModelState.AddModelError("", "Ошибка в имени пользователя или пароле");
+            logger.LogInformation($"Ошибка при указании учетных данных в процессе входа {Model.UserName} в систему");
             return View(Model);
              
         }
@@ -101,7 +103,9 @@ namespace WebStore.Controllers
 
         public async Task<IActionResult> Logout()
         {
+            var userName = User.Identity!.Name;
             await _SignInManager.SignOutAsync();
+            logger.LogInformation($"Пользователь {userName} вышел из системы");
             return RedirectToAction("Index", "Home");
         }
 
