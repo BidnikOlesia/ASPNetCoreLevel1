@@ -102,14 +102,14 @@ namespace WebStore
 
                 opt.SlidingExpiration = true;
             });
-            
+
             //services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
             //services.AddScoped<IEmployeesData, SqlEmployeesData>();
             //services.AddScoped<ICartService, InCookiesCartService>();
             //services.AddScoped<IProductData, SqlProductData>();
             //services.AddScoped<IOrderService, SqlOrderService>();
+            services.AddScoped<ICartStore, InCookiesCartStore>();
             services.AddScoped<ICartService, CartService>();
-            services.AddScoped<ICartService, InCookiesCartService>();
 
 
             //services.AddHttpClient<IValuesService, ValuesClient>(client=>client.BaseAddress = new Uri(Configuration["WebAPI"]));
