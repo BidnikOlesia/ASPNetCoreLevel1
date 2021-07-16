@@ -345,3 +345,4 @@ healthchecksdb
 **/WebStore/wwwroot/css/site.min.css
 **/WebStore/wwwroot/css/site.css
 /WebStore/HWWebStore.db
+/UI/WebStore/Logs
