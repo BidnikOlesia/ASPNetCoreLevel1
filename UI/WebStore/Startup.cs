@@ -26,6 +26,8 @@ using WebStore.WebAPI.Clients.Orders;
 using WebStore.WebAPI.Clients.Identity;
 using Microsoft.Extensions.Logging;
 using WebStoreLogger;
+using WebStore.Infrastructure.MiddleWare;
+using WebStore.Services.Services;
 
 namespace WebStore
 {
@@ -103,9 +105,12 @@ namespace WebStore
             
             //services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
             //services.AddScoped<IEmployeesData, SqlEmployeesData>();
-            services.AddScoped<ICartService, InCookiesCartService>();
+            //services.AddScoped<ICartService, InCookiesCartService>();
             //services.AddScoped<IProductData, SqlProductData>();
             //services.AddScoped<IOrderService, SqlOrderService>();
+            services.AddScoped<ICartService, CartService>();
+            services.AddScoped<ICartService, InCookiesCartService>();
+
 
             //services.AddHttpClient<IValuesService, ValuesClient>(client=>client.BaseAddress = new Uri(Configuration["WebAPI"]));
             //services.AddHttpClient<IEmployeesData, EmployeesClient>(client => client.BaseAddress = new Uri(Configuration["WebAPI"]));
@@ -139,6 +144,8 @@ namespace WebStore
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

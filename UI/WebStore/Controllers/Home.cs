@@ -25,6 +25,8 @@ namespace WebStore.Controllers
             return View();
         }
 
+        public IActionResult Throw(string Message) => throw new ApplicationException(Message ?? "Error in Main controller");
+
         public IActionResult SecondAction()
         {
             return Content(Configuration["Greetings"]);
